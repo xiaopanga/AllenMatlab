@@ -1,9 +1,10 @@
-list = dir();
+[FileName,PathName,FilterIndex]=uigetfile({'*.TIF'},'MultiSelect', 'on');
 
-for i =1:size(list,1)
-    if(list(i).isdir ==0)&&(size(strfind(list(i).name,'.TIF'),1)>0)
-        im = imread(list(i,1).name);
-        im = cast(im,'uint16');
-        imwrite(im,strrep(list(i).name,'.TIF','.png'));
-    end
+for i =1:size(FileName,2)
+    filename = strcat(PathName,FileName{i});
+    
+    im = imread(filename);
+    im = cast(im,'uint16');
+    imwrite(im,strrep(filename,'.TIF','.png'));
+    
 end
