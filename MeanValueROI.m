@@ -41,6 +41,6 @@ for i = 1:size(fileList,1)
         Mask = imcrop(im,rect);
         Mask = imcrop(Mask,rect2);
         avg_value = mean(mean(Mask));   
-        data = [data;list(1) avg_value];
+        data = [data;list' avg_value];
     end
 end
