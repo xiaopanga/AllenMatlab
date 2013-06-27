@@ -20,16 +20,22 @@ end
 FileLocation = strcat(PathName,fileList(fileNumber).name);
 im = imread(FileLocation);
 im = cast(im,'uint16');
-[X,Y,Mask,rect] = imcrop(im);
-[X2,Y2,Mask,rect2] = imcrop(Mask);
+imagesc(im)
+[X,Y,Mask,rect] = imcrop();
+imagesc(Mask);
+[X2,Y2,Mask,rect2] = imcrop();
+prompt = {'Name Format '};
+dlg_title = 'Input';
+num_lines = 1;
 
+NameFormat = inputdlg(prompt,dlg_title,num_lines);
 
 data = [];
 
 for i = 1:size(fileList,1)
     %find min and max values
     if(fileList(i).isdir == 0)&&( size(strfind(fileList(i).name,'.TIF'),2)>0)
-        [list] = sscanf(fileList(i).name,'%i%s');
+        [list] = sscanf(fileList(i).name,NameFormat{1});
         im = imread(strcat(PathName,fileList(i).name));
         im = cast(im,'uint16');
         Mask = imcrop(im,rect);
